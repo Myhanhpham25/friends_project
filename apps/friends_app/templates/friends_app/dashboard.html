@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Friend Dashboard</title>
+</head>
+<body>
+<p><a href = "/logout">Log out</a></p>
+<h1> Hello, {{request.session.name}} !</h1>
+<h1> User ID, {{request.session.id}} !</h1>
+<h3> Here is the list of your friends: </h3>
+
+<table style="border-style: solid; border-collapse: collapse; border: 1px solid black;">	
+	<thead >
+		<tr >
+			<th>Alias</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody style ="border: 1px solid black;"> 
+		{%for friend in myfriends%}<tr>			
+			<td>{{friend.name}} --- id {{friend.id}}</td>
+			<td><a href="/friends_app/show/{{friend.id}}">View Profile</a> <a href ="/friends_app/remove/{{friend.id}}">Remove as friend</a></td>				
+		</tr>{%endfor%}
+	</tbody>
+</table>
+		
+
+<h3> Other Users not on your friend's list: </h3>
+<table style="border-style: solid; border-collapse: collapse; border: 1px solid black;">	
+	<thead >
+		<tr >
+			<th>Alias</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody style ="border: 1px solid black;"> 
+		{%for friend in otherfriends%}<tr>			
+			<td><a href="/friends_app/show/{{friend.id}}">{{friend.name}} || {{friend.id}}</a></td>
+			<td><button method="post" onclick= "location.href = '/friends_app/create/{{friend.id}}';">Add as Friend</button></td>				
+		</tr>{%endfor%}
+	</tbody>
+</table>
+
+
+	
+	
+</form>
+</body>
+</html>
